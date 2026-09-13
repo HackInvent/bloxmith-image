@@ -1,0 +1,29 @@
+<div class="modal-panel block-config-modal" role="dialog" aria-modal="true" aria-labelledby="{{ node_id }}BlockModalTitle" data-generic-block-modal-root data-block-runtime-refresh="autonomous" data-node-id="{{ node_id }}" data-node-kind="{{ node_kind }}">
+  <div class="modal-header">
+    <div>
+      <span class="panel-kicker">Bloc {{ node_kind_title }}</span>
+      <h2 id="{{ node_id }}BlockModalTitle">{{ node_title }}</h2>
+    </div>
+    <div class="modal-actions">
+      <button class="ghost-btn" data-close-block-modal type="button">Fermer</button>
+    </div>
+  </div>
+  <div class="block-config-modal-body">
+    <section class="ports-editor-section">
+      <div class="ports-editor-header"><span class="group-label">Identité</span></div>
+      {{ title_field_html }}
+    </section>
+    <section class="ports-editor-section">
+      <div class="ports-editor-header"><span class="group-label">Configuration</span></div>
+      {{ config_fields_html }}
+    </section>
+    <section class="ports-editor-section">
+      <div class="ports-editor-header"><span class="group-label">Ports</span></div>
+      {{ ports_html }}
+    </section>
+    <section class="ports-editor-section">
+      <div class="ports-editor-header"><span class="group-label">Dernier état</span></div>
+      {{ runtime_html }}
+    </section>
+  </div>
+</div>

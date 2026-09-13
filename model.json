@@ -1,0 +1,44 @@
+{
+  "kind": "image",
+  "title": "Image",
+  "ports": {
+    "inputs": [
+      {
+        "id": 1,
+        "name": "instruction",
+        "title": "Instruction",
+        "accepts": [
+          "message/*"
+        ],
+        "multiplicity": "many",
+        "required": true,
+        "execution_requirement": "required_for_execution"
+      }
+    ],
+    "outputs": [
+      {
+        "id": 1,
+        "name": "image",
+        "title": "Image",
+        "emits": [
+          "image/path",
+          "file/path",
+          "message/*"
+        ],
+        "multiplicity": "many"
+      }
+    ]
+  },
+  "config": {
+    "image_model": "gpt-5.5",
+    "image_effort": "low",
+    "image_sandbox": "workspace-write",
+    "image_timeout_sec": 180
+  },
+  "runtime": {
+    "initial_state": "waiting",
+    "runtime_executable": true,
+    "active_worker": true,
+    "centralized_executor": "image"
+  }
+}
