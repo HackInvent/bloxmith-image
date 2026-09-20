@@ -7,11 +7,11 @@
 # Created Date: 2024-08-29
 # -----------------------------------------------------------------------------
 
-"""F5.12 - Bloc Image via Codex CLI simulé.
+"""F5.12 - Image block through a simulated Codex CLI.
 
-Le test injecte un faux `codex` qui émet `thread.started` et crée une image
-dans `$CODEX_HOME/generated_images/<thread_id>/`. Le bloc `image` doit détecter
-cette image, la copier dans `exports/images/` et émettre un chemin absolu.
+The test injects a fake `codex` that emits `thread.started` and creates an image
+in `$CODEX_HOME/generated_images/<thread_id>/`. The `image` block must detect
+that image, copy it into `exports/images/` and emit an absolute path.
 """
 
 # Test cases:
@@ -139,7 +139,7 @@ def _verify_empty_instruction_failure() -> None:
         )
     )
     expect(result.status == "failed", "Image without an instruction must fail.")
-    expect("instruction" in result.error, "L'erreur Image vide doit mentionner l'instruction.")
+    expect("instruction" in result.error, "The empty Image error must mention the instruction.")
 
 
 def _verify_image_ui_contract() -> None:
@@ -149,9 +149,9 @@ def _verify_image_ui_contract() -> None:
     html = str(modal.get("html") or "")
     assets = modal.get("assets") or []
     js = (Path(__file__).resolve().parents[1] / "assets/js/block_modal.js").read_text(encoding="utf-8")
-    expect('data-node-kind="image"' in html, "Le modal Image doit venir du bloc.")
-    expect('data-block-runtime-refresh="autonomous"' in html, "Le modal Image doit gerer son refresh runtime.")
-    expect("export function mount" in js, "Le JS Image doit monter le modal via le registre block UI.")
+    expect('data-node-kind="image"' in html, "The Image modal must come from the block.")
+    expect('data-block-runtime-refresh="autonomous"' in html, "The Image modal must own its runtime refresh.")
+    expect("export function mount" in js, "The Image JS must mount the modal through the block UI registry.")
 
 
 def main() -> None:
@@ -178,10 +178,10 @@ def main() -> None:
             expect(run.get("status") == "success", "The image run must succeed with the fake Codex.")
             output = run.get("output_values", {}).get("image-1:1", {})
             image_path = Path(str(output.get("value") or ""))
-            expect(image_path.is_absolute(), "Le bloc image doit émettre un chemin absolu.")
+            expect(image_path.is_absolute(), "The image block must emit an absolute path.")
             expect(image_path.is_file(), "The copied image is missing.")
             expect(server.root_dir.resolve() in image_path.resolve().parents, "The image must be copied into the test project.")
-            expect("exports/images" in str(image_path), "L'image doit être copiée dans exports/images/.")
+            expect("exports/images" in str(image_path), "The image must be copied into exports/images/.")
             expect(output.get("content_type") == "image/path", "The image content_type must be image/path.")
     print("[ok] F5.12_image_block")
 

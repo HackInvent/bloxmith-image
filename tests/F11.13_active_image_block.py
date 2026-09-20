@@ -7,11 +7,11 @@
 # Created Date: 2024-07-23
 # -----------------------------------------------------------------------------
 
-"""F11.13 - Bloc Image en runtime ZeroMQ actif.
+"""F11.13 - Image block in the active ZeroMQ runtime.
 
-Le test injecte un faux `codex` générant une image dans `$CODEX_HOME`, puis
-vérifie que le runner `image` actif détecte l'image, la copie dans
-`exports/images/` et publie son chemin absolu sans fallback centralisé.
+The test injects a fake `codex` that generates an image in `$CODEX_HOME`, then
+checks that the active `image` runner detects the image, copies it into
+`exports/images/` and publishes its absolute path with no centralized fallback.
 """
 
 # Test cases:
@@ -137,9 +137,9 @@ def main() -> None:
             expect("fallback centralized" not in logs, "The active image block must not fall back to the centralized engine.")
             output = run.get("output_values", {}).get("image-1:1", {})
             image_path = Path(str(output.get("value") or ""))
-            expect(image_path.is_absolute(), "Le bloc image actif doit émettre un chemin absolu.")
+            expect(image_path.is_absolute(), "The active image block must emit an absolute path.")
             expect(image_path.is_file(), "The copied active image is missing.")
-            expect("exports/images" in str(image_path), "L'image active doit être copiée dans exports/images/.")
+            expect("exports/images" in str(image_path), "The active image must be copied into exports/images/.")
             expect(run.get("results", {}).get("image-1", {}).get("transport") == "zeromq_active", "Image must run through zeromq_active.")
 
             prepared = prepare_run_api(server, document, runtime_mode="zeromq_active")

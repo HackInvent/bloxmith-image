@@ -38,10 +38,10 @@ from bloxsmith_app.block_api import (
 
 IMAGE_NODE_PROMPT_TEMPLATE = (
     "Your only role is to generate images, nothing else, "
-    "en respectant l'instruction suivante: {instruction}\n\n"
-    "Utilise l'image generation tool of 'image disponible. "
-    "Ne crée pas de fichier dans le workspace, ne copie rien, "
-    "et ne réponds pas par une description textuelle."
+    "following this instruction: {instruction}\n\n"
+    "Use the available image generation tool. "
+    "Do not create any file in the workspace, do not copy anything, "
+    "and do not answer with a text description."
 )
 DEFAULT_IMAGE_CODEX_MODEL = "gpt-5.5"
 DEFAULT_IMAGE_CODEX_EFFORT = "low"
@@ -153,15 +153,15 @@ class ImageBlock(BlockDefinition):
         if not instruction:
             return BlockRuntimeResult(
                 status="failed",
-                error="instruction d'entree vide.",
+                error="empty input instruction.",
                 exit_code=1,
-                last_message="instruction d'entree vide.",
+                last_message="empty input instruction.",
                 worker_received="-",
-                logs=[f"[image-error] {context.node_id}: instruction d'entree vide."],
+                logs=[f"[image-error] {context.node_id}: empty input instruction."],
             )
 
         logs: list[str] = []
-        self._emit_log(context, logs, "[image] Consigne globale Codex ignoree pour ce bloc.")
+        self._emit_log(context, logs, "[image] Global Codex instruction ignored for this block.")
         image_result = self._execute_generation(context, instruction, logs)
         if image_result.get("status") == "cancelled":
             return BlockRuntimeResult(status="cancelled", worker_received=instruction)
