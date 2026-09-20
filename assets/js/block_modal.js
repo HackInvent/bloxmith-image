@@ -6,22 +6,14 @@
  * Created Date: 2026-06-10
  */
 
-(function () {
-  "use strict";
-
-  const registry = (window.CWBlockUiBlocks = window.CWBlockUiBlocks || {});
-
-  registry.image = {
-    /**
-     * Mark the Image modal as block-owned while generic fields and Apply stay
-     * handled by the framework modal API.
-     *
-     * @param {HTMLElement} root - Mounted Image modal root.
-     */
-    mount(root) {
-      if (root instanceof HTMLElement) {
-        root.dataset.imageModalMounted = "true";
-      }
-    },
-  };
-})();
+/**
+ * Mark the Image modal as block-owned while generic fields and Apply stay
+ * handled by the framework modal API.
+ *
+ * @param {HTMLElement} root - Mounted Image modal root.
+ */
+export function mount(root) {
+  if (root instanceof HTMLElement) {
+    root.dataset.imageModalMounted = "true";
+  }
+}

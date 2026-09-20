@@ -60,16 +60,6 @@ class ImageBlock(BlockDefinition):
     """Autonomous block implementation for `ImageBlock`."""
     kind = "image"
 
-    def ui_assets(self, surface: str = "modal") -> list[dict[str, str]]:
-        """Return block-owned frontend assets for the requested UI surface.
-
-        Args:
-            surface: UI surface requesting assets.
-        """
-        if surface == "modal":
-            return [{"kind": "js", "path": "assets/js/block_modal.js"}]
-        return []
-
     def render_node_card(self, *, node: dict[str, Any], payload: dict[str, Any] | None = None) -> dict[str, Any]:
         """Render the Image canvas card body from the block-owned template.
 

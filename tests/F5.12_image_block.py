@@ -37,6 +37,8 @@ from ui_smoke_common import (
     text_node,
     wait_for_run_terminal,
 )
+from urllib.parse import quote
+from block_test_packages import install_test_package, release_key, surface_payload
 
 from blocs import get_block_definition
 from bloxsmith_app.block_runtime import BlockRuntimeContext
@@ -149,8 +151,7 @@ def _verify_image_ui_contract() -> None:
     js = (Path(__file__).resolve().parents[1] / "assets/js/block_modal.js").read_text(encoding="utf-8")
     expect('data-node-kind="image"' in html, "Le modal Image doit venir du bloc.")
     expect('data-block-runtime-refresh="autonomous"' in html, "Le modal Image doit gerer son refresh runtime.")
-    expect({"kind": "js", "path": "assets/js/block_modal.js"} in assets, "Le modal Image doit declarer son JS block-owned.")
-    expect("registry.image" in js, "Le JS Image doit monter le modal via le registre block UI.")
+    expect("export function mount" in js, "Le JS Image doit monter le modal via le registre block UI.")
 
 
 def main() -> None:
@@ -158,6 +159,11 @@ def main() -> None:
     _verify_image_ui_contract()
     with fake_image_codex_cli():
         with isolated_server() as server:
+            # Les surfaces sont des assets de release : le bundled kind n'en sert aucun.
+            model = install_test_package(server, "image")
+            key = quote(release_key(model), safe="")
+            served = lambda payload, suffix: next(
+                asset["path"] for asset in payload["assets"] if asset["path"].endswith(suffix))
             document = graph_payload(
                 "F5 Image",
                 [

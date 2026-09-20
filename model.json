@@ -1,7 +1,9 @@
 {
   "kind": "image",
   "version": "0.1.0",
-  "bloxsmith_compatibility": ["1.0.9"],
+  "bloxsmith_compatibility": [
+    "1.0.9"
+  ],
   "tested_with_bloxsmith": "1.0.9",
   "title": "Image",
   "ports": {
@@ -43,5 +45,13 @@
     "runtime_executable": true,
     "active_worker": true,
     "centralized_executor": "image"
+  },
+  "ui_assets": {
+    "modal": [
+      {
+        "kind": "js",
+        "path": "assets/js/block_modal.js"
+      }
+    ]
   }
 }
