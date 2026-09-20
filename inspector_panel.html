@@ -9,22 +9,22 @@
       <span class="inspector-node-tag">{{ node_tag }}</span>
     </div>
     <div class="inspector-tabs">
-      <button class="inspector-tab {{ general_active }}" data-inspector-tab="general" type="button">Général</button>
+      <button class="inspector-tab {{ general_active }}" data-inspector-tab="general" type="button">General</button>
       <button class="inspector-tab {{ ports_active }} {{ ports_tab_hidden }}" data-inspector-tab="ports" type="button" {{ ports_tab_disabled }}>Ports</button>
     </div>
   </div>
 
   <div class="inspector-view {{ general_hidden }}" data-inspector-panel-tab="general">
     <div class="field-group {{ title_hidden }}">
-      <label>Nom du node</label>
+      <label>Node name</label>
       <input data-node-title-input type="text" placeholder="{{ node_title_placeholder }}" value="{{ node_title }}" />
     </div>
     <div class="inspector-actions {{ actions_hidden }}">
-      <button class="ghost-btn {{ duplicate_hidden }}" data-block-action="duplicate" type="button">Dupliquer</button>
+      <button class="ghost-btn {{ duplicate_hidden }}" data-block-action="duplicate" type="button">Duplicate</button>
     </div>
     <div class="field-grid">
       <div class="field-group">
-        <label>Modèle</label>
+        <label>Model</label>
         <select data-image-model data-block-config-field="image_model">{{ model_options }}</select>
       </div>
       <div class="field-group">
@@ -33,34 +33,34 @@
       </div>
     </div>
     <p class="inspector-copy">
-      Ce bloc reçoit une instruction en entrée et retourne le chemin de l'image générée.
-      Le résultat complet est disponible via <strong>Outputs</strong> après exécution.
+      This block receives an instruction as input and returns the path of the generated image.
+      The full result is available through <strong>Outputs</strong> after execution.
     </p>
     <div class="inspector-actions">
-      <button class="solid-btn" data-block-apply type="button" disabled>Appliquer</button>
+      <button class="solid-btn" data-block-apply type="button" disabled>Apply</button>
     </div>
   </div>
 
   <div class="inspector-view {{ ports_hidden }}" data-inspector-panel-tab="ports">
     <div class="ports-editor-section">
       <div class="ports-editor-header">
-        <span class="group-label">Entrées</span>
+        <span class="group-label">Inputs</span>
         <span class="ports-editor-actions">
           <button class="ghost-btn add-port-btn {{ add_mcp_input_hidden }}" data-add-mcp-input-port type="button" {{ add_mcp_input_disabled }}>+ MCP</button>
-          <button class="ghost-btn add-port-btn {{ add_input_hidden }}" data-add-input-port type="button" {{ add_input_disabled }}>+ Ajouter une entrée</button>
+          <button class="ghost-btn add-port-btn {{ add_input_hidden }}" data-add-input-port type="button" {{ add_input_disabled }}>+ Add an input</button>
         </span>
       </div>
       <div class="ports-editor-list">{{ inputs_html }}</div>
     </div>
     <div class="ports-editor-section">
       <div class="ports-editor-header">
-        <span class="group-label">Sorties</span>
-        <button class="ghost-btn add-port-btn {{ add_output_hidden }}" data-add-output-port type="button" {{ add_output_disabled }}>+ Ajouter une sortie</button>
+        <span class="group-label">Outputs</span>
+        <button class="ghost-btn add-port-btn {{ add_output_hidden }}" data-add-output-port type="button" {{ add_output_disabled }}>+ Add an output</button>
       </div>
       <div class="ports-editor-list">{{ outputs_html }}</div>
     </div>
     <div class="inspector-copy">
-      Les noms sont normalisés automatiquement : minuscules, espaces remplacés par <code>_</code>.
+      Names are normalized automatically: lowercase, spaces replaced with <code>_</code>.
     </div>
   </div>
 </div>

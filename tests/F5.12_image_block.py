@@ -138,7 +138,7 @@ def _verify_empty_instruction_failure() -> None:
             root_dir=Path.cwd(),
         )
     )
-    expect(result.status == "failed", "Image sans instruction doit échouer.")
+    expect(result.status == "failed", "Image without an instruction must fail.")
     expect("instruction" in result.error, "L'erreur Image vide doit mentionner l'instruction.")
 
 
@@ -159,7 +159,7 @@ def main() -> None:
     _verify_image_ui_contract()
     with fake_image_codex_cli():
         with isolated_server() as server:
-            # Les surfaces sont des assets de release : le bundled kind n'en sert aucun.
+            # Surfaces are release assets: a bundled kind serves none of them.
             model = install_test_package(server, "image")
             key = quote(release_key(model), safe="")
             served = lambda payload, suffix: next(
@@ -167,7 +167,7 @@ def main() -> None:
             document = graph_payload(
                 "F5 Image",
                 [
-                    text_node("text-1", "Instruction image", "un chat réaliste", 80, 120),
+                    text_node("text-1", "Instruction image", "a realistic cat", 80, 120),
                     image_node(),
                 ],
                 [data_edge("edge-text-image", "text-1", 1, "image-1", 1)],
@@ -175,14 +175,14 @@ def main() -> None:
             created = create_run_api(server, document, runtime_mode="centralized")
             run = wait_for_run_terminal(server, str(created.get("run_id") or ""), timeout_sec=20)
 
-            expect(run.get("status") == "success", "Le run image doit réussir avec le faux Codex.")
+            expect(run.get("status") == "success", "The image run must succeed with the fake Codex.")
             output = run.get("output_values", {}).get("image-1:1", {})
             image_path = Path(str(output.get("value") or ""))
             expect(image_path.is_absolute(), "Le bloc image doit émettre un chemin absolu.")
-            expect(image_path.is_file(), "L'image copiée est absente.")
-            expect(server.root_dir.resolve() in image_path.resolve().parents, "L'image doit être copiée dans le projet de test.")
+            expect(image_path.is_file(), "The copied image is missing.")
+            expect(server.root_dir.resolve() in image_path.resolve().parents, "The image must be copied into the test project.")
             expect("exports/images" in str(image_path), "L'image doit être copiée dans exports/images/.")
-            expect(output.get("content_type") == "image/path", "Le content_type image doit être image/path.")
+            expect(output.get("content_type") == "image/path", "The image content_type must be image/path.")
     print("[ok] F5.12_image_block")
 
 

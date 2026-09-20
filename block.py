@@ -37,9 +37,9 @@ from bloxsmith_app.block_api import (
 
 
 IMAGE_NODE_PROMPT_TEMPLATE = (
-    "Ton seul rôle est de générer des images, rien d'autre, "
+    "Your only role is to generate images, nothing else, "
     "en respectant l'instruction suivante: {instruction}\n\n"
-    "Utilise l'outil de génération d'image disponible. "
+    "Utilise l'image generation tool of 'image disponible. "
     "Ne crée pas de fichier dans le workspace, ne copie rien, "
     "et ne réponds pas par une description textuelle."
 )
@@ -99,7 +99,7 @@ class ImageBlock(BlockDefinition):
             template=(
                 template
                 .replace("{{ model_options }}", self._select_options(["gpt-5.5", "gpt-5.4", "gpt-5.4-mini", "gpt-5.2"], model))
-                .replace("{{ effort_options }}", self._select_options(["low", "medium", "high", "xhigh"], effort, labels={"low": "Bas", "medium": "Moyen", "high": "Haut", "xhigh": "Élevé"}))
+                .replace("{{ effort_options }}", self._select_options(["low", "medium", "high", "xhigh"], effort, labels={"low": "Bas", "medium": "Moyen", "high": "Haut", "xhigh": "High"}))
             ),
             node={**node, "type": self.kind, "kind": self.kind},
             payload=payload,
@@ -336,7 +336,7 @@ class ImageBlock(BlockDefinition):
         if exit_code != 0 or image_path is None:
             if not image_error and exit_code == 0:
                 expected_dir = generated_root / self._safe_path_segment(thread_id) if thread_id else generated_root
-                image_error = f"Aucune image generee detectee dans {expected_dir}"
+                image_error = f"No generated image found in {expected_dir}"
             return {
                 "status": "failed",
                 "port_id": port_id,

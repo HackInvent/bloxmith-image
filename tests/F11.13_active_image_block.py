@@ -124,7 +124,7 @@ def main() -> None:
             document = graph_payload(
                 "F11 active image",
                 [
-                    text_node("text-1", "Instruction image", "un chat réaliste", 80, 120),
+                    text_node("text-1", "Instruction image", "a realistic cat", 80, 120),
                     image_node(),
                 ],
                 [data_edge("edge-text-image", "text-1", 1, "image-1", 1)],
@@ -133,14 +133,14 @@ def main() -> None:
             run = wait_for_run_terminal(server, str(created.get("run_id") or ""), timeout_sec=25)
             logs = "\n".join(run.get("logs", []))
 
-            expect(run.get("status") == "success", "Le run image actif doit réussir.")
-            expect("fallback centralized" not in logs, "Le bloc image actif ne doit pas fallback centralisé.")
+            expect(run.get("status") == "success", "The active image run must succeed.")
+            expect("fallback centralized" not in logs, "The active image block must not fall back to the centralized engine.")
             output = run.get("output_values", {}).get("image-1:1", {})
             image_path = Path(str(output.get("value") or ""))
             expect(image_path.is_absolute(), "Le bloc image actif doit émettre un chemin absolu.")
-            expect(image_path.is_file(), "L'image active copiée est absente.")
+            expect(image_path.is_file(), "The copied active image is missing.")
             expect("exports/images" in str(image_path), "L'image active doit être copiée dans exports/images/.")
-            expect(run.get("results", {}).get("image-1", {}).get("transport") == "zeromq_active", "Image doit être exécuté via zeromq_active.")
+            expect(run.get("results", {}).get("image-1", {}).get("transport") == "zeromq_active", "Image must run through zeromq_active.")
 
             prepared = prepare_run_api(server, document, runtime_mode="zeromq_active")
             active_run_id = str(prepared.get("run_id") or "")
@@ -150,15 +150,15 @@ def main() -> None:
                 server,
                 active_run_id,
                 lambda state: bool(state.get("output_values", {}).get("image-1:1", {}).get("value")),
-                "Le bloc image actif Load/Play n'a pas publié d'image.",
+                "The active image block did not publish an image on Load/Play.",
                 timeout_sec=25,
             )
             active_image_path = Path(str(active_state.get("output_values", {}).get("image-1:1", {}).get("value") or ""))
-            expect(active_state.get("status") == "running", "Le runtime image actif doit rester vivant après Play.")
-            expect(active_image_path.is_file(), "L'image active Load/Play copiée est absente.")
+            expect(active_state.get("status") == "running", "The active image runtime must stay alive after Play.")
+            expect(active_image_path.is_file(), "The copied active Load/Play image is missing.")
             stop_run_api(server, active_run_id)
             stopped = wait_for_run_terminal(server, active_run_id, timeout_sec=10)
-            expect(stopped.get("status") == "cancelled", "Stop doit terminer le runtime image actif.")
+            expect(stopped.get("status") == "cancelled", "Stop must end the active image runtime.")
     print("[ok] F11.13_active_image_block")
 
 
