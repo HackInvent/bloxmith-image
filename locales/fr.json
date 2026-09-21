@@ -1,0 +1,7 @@
+{
+  "block.image.model.title": "Image",
+  "block.image.pill": "Image",
+  "block.image.model_label": "Modèle",
+  "block.image.effort_label": "Effort",
+  "block.image.inspector_hint": "Ce bloc reçoit une instruction en entrée et renvoie le chemin de l'image générée. Le résultat complet est disponible via Outputs après exécution."
+}

@@ -366,7 +366,7 @@ class ImageBlock(BlockDefinition):
                 "last_message": "",
                 "exit_code": 1,
                 "usage": usage,
-                "error": f"Image generee mais copie impossible: {exc}",
+                "error": f"Image generated but copy failed: {exc}",
                 "thread_id": thread_id,
                 "source_file": str(image_path),
             }

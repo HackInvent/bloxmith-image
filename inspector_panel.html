@@ -9,58 +9,57 @@
       <span class="inspector-node-tag">{{ node_tag }}</span>
     </div>
     <div class="inspector-tabs">
-      <button class="inspector-tab {{ general_active }}" data-inspector-tab="general" type="button">General</button>
-      <button class="inspector-tab {{ ports_active }} {{ ports_tab_hidden }}" data-inspector-tab="ports" type="button" {{ ports_tab_disabled }}>Ports</button>
+      <button class="inspector-tab {{ general_active }}" data-inspector-tab="general" type="button" data-i18n="ui.block_kit.general">General</button>
+      <button class="inspector-tab {{ ports_active }} {{ ports_tab_hidden }}" data-inspector-tab="ports" type="button" {{ ports_tab_disabled }} data-i18n="ui.block_kit.ports">Ports</button>
     </div>
   </div>
 
   <div class="inspector-view {{ general_hidden }}" data-inspector-panel-tab="general">
     <div class="field-group {{ title_hidden }}">
-      <label>Node name</label>
+      <label data-i18n="ui.block_kit.node_name">Node name</label>
       <input data-node-title-input type="text" placeholder="{{ node_title_placeholder }}" value="{{ node_title }}" />
     </div>
     <div class="inspector-actions {{ actions_hidden }}">
-      <button class="ghost-btn {{ duplicate_hidden }}" data-block-action="duplicate" type="button">Duplicate</button>
+      <button class="ghost-btn {{ duplicate_hidden }}" data-block-action="duplicate" type="button" data-i18n="ui.block_kit.duplicate">Duplicate</button>
     </div>
     <div class="field-grid">
       <div class="field-group">
-        <label>Model</label>
+        <label data-i18n="block.image.model_label">Model</label>
         <select data-image-model data-block-config-field="image_model">{{ model_options }}</select>
       </div>
       <div class="field-group">
-        <label>Effort</label>
+        <label data-i18n="block.image.effort_label">Effort</label>
         <select data-image-effort data-block-config-field="image_effort">{{ effort_options }}</select>
       </div>
     </div>
-    <p class="inspector-copy">
+    <p class="inspector-copy" data-i18n="block.image.inspector_hint">
       This block receives an instruction as input and returns the path of the generated image.
-      The full result is available through <strong>Outputs</strong> after execution.
+      The full result is available through Outputs after execution.
     </p>
     <div class="inspector-actions">
-      <button class="solid-btn" data-block-apply type="button" disabled>Apply</button>
+      <button class="solid-btn" data-block-apply type="button" disabled data-i18n="ui.block_kit.apply">Apply</button>
     </div>
   </div>
 
   <div class="inspector-view {{ ports_hidden }}" data-inspector-panel-tab="ports">
     <div class="ports-editor-section">
       <div class="ports-editor-header">
-        <span class="group-label">Inputs</span>
+        <span class="group-label" data-i18n="ui.block_kit.inputs">Inputs</span>
         <span class="ports-editor-actions">
           <button class="ghost-btn add-port-btn {{ add_mcp_input_hidden }}" data-add-mcp-input-port type="button" {{ add_mcp_input_disabled }}>+ MCP</button>
-          <button class="ghost-btn add-port-btn {{ add_input_hidden }}" data-add-input-port type="button" {{ add_input_disabled }}>+ Add an input</button>
+          <button class="ghost-btn add-port-btn {{ add_input_hidden }}" data-add-input-port type="button" {{ add_input_disabled }} data-i18n="ui.block_kit.add_input">+ Add an input</button>
         </span>
       </div>
       <div class="ports-editor-list">{{ inputs_html }}</div>
     </div>
     <div class="ports-editor-section">
       <div class="ports-editor-header">
-        <span class="group-label">Outputs</span>
-        <button class="ghost-btn add-port-btn {{ add_output_hidden }}" data-add-output-port type="button" {{ add_output_disabled }}>+ Add an output</button>
+        <span class="group-label" data-i18n="ui.block_kit.outputs">Outputs</span>
+        <button class="ghost-btn add-port-btn {{ add_output_hidden }}" data-add-output-port type="button" {{ add_output_disabled }} data-i18n="ui.block_kit.add_output">+ Add an output</button>
       </div>
       <div class="ports-editor-list">{{ outputs_html }}</div>
     </div>
-    <div class="inspector-copy">
-      Names are normalized automatically: lowercase, spaces replaced with <code>_</code>.
-    </div>
+    <div class="inspector-copy" data-i18n="ui.block_kit.port_names_hint">
+      Names are normalized automatically: lowercase, spaces replaced by _.</div>
   </div>
 </div>

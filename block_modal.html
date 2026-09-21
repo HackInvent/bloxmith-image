@@ -1,28 +1,28 @@
 <div class="modal-panel block-config-modal" role="dialog" aria-modal="true" aria-labelledby="{{ node_id }}BlockModalTitle" data-generic-block-modal-root data-block-runtime-refresh="autonomous" data-node-id="{{ node_id }}" data-node-kind="{{ node_kind }}">
   <div class="modal-header">
     <div>
-      <span class="panel-kicker">Bloc {{ node_kind_title }}</span>
+      <span class="panel-kicker"><span data-i18n="ui.block_kit.block">Block</span> {{ node_kind_title }}</span>
       <h2 id="{{ node_id }}BlockModalTitle">{{ node_title }}</h2>
     </div>
     <div class="modal-actions">
-      <button class="ghost-btn" data-close-block-modal type="button">Close</button>
+      <button class="ghost-btn" data-close-block-modal type="button" data-i18n="ui.block_kit.close">Close</button>
     </div>
   </div>
   <div class="block-config-modal-body">
     <section class="ports-editor-section">
-      <div class="ports-editor-header"><span class="group-label">Identity</span></div>
+      <div class="ports-editor-header"><span class="group-label" data-i18n="ui.block_kit.identity">Identity</span></div>
       {{ title_field_html }}
     </section>
     <section class="ports-editor-section">
-      <div class="ports-editor-header"><span class="group-label">Configuration</span></div>
+      <div class="ports-editor-header"><span class="group-label" data-i18n="ui.block_kit.configuration">Configuration</span></div>
       {{ config_fields_html }}
     </section>
     <section class="ports-editor-section">
-      <div class="ports-editor-header"><span class="group-label">Ports</span></div>
+      <div class="ports-editor-header"><span class="group-label" data-i18n="ui.block_kit.ports">Ports</span></div>
       {{ ports_html }}
     </section>
     <section class="ports-editor-section">
-      <div class="ports-editor-header"><span class="group-label">Last state</span></div>
+      <div class="ports-editor-header"><span class="group-label" data-i18n="ui.block_kit.last_state">Last state</span></div>
       {{ runtime_html }}
     </section>
   </div>

@@ -6,6 +6,10 @@
   ],
   "tested_with_bloxsmith": "1.0.9",
   "title": "Image",
+  "locales": {
+    "en": "locales/en.json",
+    "fr": "locales/fr.json"
+  },
   "ports": {
     "inputs": [
       {
