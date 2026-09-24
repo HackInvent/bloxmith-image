@@ -1,3 +1,5 @@
+import { withProperties } from "./properties.js";
+
 /**
  * Role: Mounts the Image block modal frontend.
  * File Name: block_modal.js
@@ -12,8 +14,13 @@
  *
  * @param {HTMLElement} root - Mounted Image modal root.
  */
-export function mount(root) {
+function mountOwned(root) {
   if (root instanceof HTMLElement) {
     root.dataset.imageModalMounted = "true";
   }
+}
+
+/** Keep the block behavior and add properties-only accessibility. */
+export function mount(root, ...args) {
+  return withProperties(mountOwned).call(this, root, ...args);
 }
